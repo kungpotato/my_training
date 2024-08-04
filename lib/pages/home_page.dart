@@ -17,13 +17,35 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        children: pokemonList
-            .map((e) => ListTile(
-                  title: Text(e.name),
-                  leading: Image.network(e.imgUrl),
-                ))
-            .toList(),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 5, right: 5),
+        child: Wrap(
+          children: pokemonList.map((e) => _buildCard(e)).toList(),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCard(PokemonModel item) {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Card(
+        child: SizedBox(
+          width: 180,
+          height: 180,
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                Image.network(item.imgUrl),
+                Text(
+                  item.name,
+                  style: const TextStyle(fontSize: 20),
+                )
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -39,7 +61,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  fetchData() async {
+  Future<List<PokemonModel>> fetchData() async {
     final response =
         await http.get(Uri.parse('https://pokeapi.co/api/v2/pokemon'));
     final data = jsonDecode(response.body) as Map<String, dynamic>;
