@@ -16,12 +16,22 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.only(left: 5, right: 5),
-        child: Wrap(
-          children: pokemonList.map((e) => _buildCard(e)).toList(),
-        ),
+    return Padding(
+      padding: const EdgeInsets.only(left: 5, right: 5),
+      child: Column(
+        children: [
+          const Text(
+            'รายการสัตว์',
+            style: TextStyle(fontSize: 25),
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Wrap(
+                children: pokemonList.map((e) => _buildCard(e)).toList(),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
