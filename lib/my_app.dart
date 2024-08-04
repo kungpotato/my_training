@@ -45,9 +45,7 @@ class _MyAppState extends State<MyApp> {
             const SizedBox(width: 20)
           ],
         ),
-        body: Center(
-          child: _pageList.elementAt(_selectedIndex),
-        ),
+        body: _pageList.elementAt(_selectedIndex),
         bottomNavigationBar: BottomNavigationBar(
           items: const [
             BottomNavigationBarItem(
